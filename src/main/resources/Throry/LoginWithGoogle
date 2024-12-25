@@ -1,0 +1,16 @@
+Login With Google
+
+1. OAuth2 -> Add OAuth2 client starter dependency
+2. google ->
+            a. client id
+            b. client secret
+3. Add the oauth login configuration
+4. login page/ login and successhandler
+5. in your success handler you are getting data... save kar sakte hai data based on provider information
+
+
+client id - 91033398883-ncphav4rp03g06cfhdf19v3evuh2k47e.apps.googleusercontent.com
+client ssecret - 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
+
+/oauth2/authorization/google
+/oauth2/authorization/github

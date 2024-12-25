@@ -1,0 +1,64 @@
+<div data-th-fragment="contact-model">
+    <!-- Modal toggle -->
+
+
+    <!-- Main modal -->
+    <div
+            id="view-contact-model"
+            tabindex="-1"
+            aria-hidden="true"
+            class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+        <div class="relative p-4 w-full max-w-lg max-h-full">
+            <!-- Modal content -->
+            <div class="relative bg-white rounded-lg shadow-lg dark:bg-gray-800">
+                <!-- Image -->
+                <div class="relative overflow-hidden rounded-t-lg h-48 bg-gray-200 dark:bg-gray-700">
+                    <img
+                            id="contact_image"
+                            src="https://via.placeholder.com/500x300"
+                            alt="Contact Image"
+                            class="w-full h-full object-cover" />
+                </div>
+
+                <!-- Modal header -->
+                <div class="p-6">
+                    <h3
+                            id="contact_name"
+                            class="text-2xl font-bold text-gray-900 dark:text-white">
+                        Contact Name
+                    </h3>
+                    <p class="text-gray-600 dark:text-gray-400 mt-1" id="contact_email">
+                        Email: example@example.com
+                    </p>
+                    <p class="text-gray-600 dark:text-gray-400 mt-1" id="contact_phone">
+                        Phone: +1-234-567-890
+                    </p>
+                    <p class="text-gray-600 dark:text-gray-400 mt-1">
+                        <a id="contact_website" href="#" target="_blank" class="text-blue-500 hover:underline">Website</a>
+                    </p>
+                    <p class="text-gray-600 dark:text-gray-400 mt-1">
+                        <a id="contact_linkedin" href="#" target="_blank" class="text-blue-500 hover:underline">LinkedIn</a>
+                    </p>
+                    <p class="text-gray-600 dark:text-gray-400 mt-1" id="contact_address">
+                        Address: 123 Main St, City, Country
+                    </p>
+
+                    <p class="w-4 h-4 text-gray-600 dark:text-gray-400 mt-1" id="contact_favorite">
+
+                    </p>
+
+                </div>
+
+                <!-- Modal footer -->
+                <div class="flex items-center justify-end p-4 border-t border-gray-200 rounded-b dark:border-gray-700">
+                    <button
+                            onclick="closeContactModel()"
+                            type="button"
+                            class="py-2 px-4 text-sm font-medium text-white bg-gray-700 rounded-lg hover:bg-gray-600 focus:ring-2 focus:ring-gray-500">
+                        Close
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
