@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" data-th-replace="~{base :: parent(~{::#content},~{::title},~{})}">
+<head>
+    <title data-th-text="${loggedInUser.name + ' | SCM2.0'}">Profile Page</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="User Profile Page for SCM2.0">
+</head>
+<body>
+
+<div id="content">
+
+    <!-- Sidebar if user is logged in -->
+    <div th:if="${loggedInUser}">
+        <div data-th-replace="~{user/sidebar :: sidebar}"></div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="sm:pl-64 pt-20" style="min-height: 100vh;">
+        <div class="flex justify-center flex-col items-center">
+            <h1 class="text-5xl font-bold mb-4">Welcome to Profile Page</h1>
+
+        </div>
+
+
+
+        <div class="pt-4">
+
+            <div class="max-w-md mx-auto bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
+                <div class="flex flex-col items-center p-6">
+
+                    <img
+                            data-th-src="@{${loggedInUser.ProfilePic}}"
+                            onerror="this.onerror=true; this.src='/images/img.png'"
+                            class="w-24 h-24 mb-4 rounded-full shadow-lg"
+                            alt="Profile Picture">
+
+                    <h2
+                            data-th-text="${loggedInUser.name}"
+                            class="mb-1 text-2xl font-bold text-gray-900 dark:text-white"
+                    ></h2>
+
+                    <p
+                            data-th-text="${loggedInUser.email}"
+                            class="text-sm text-gray-500 dark:text-gray-400">Email: john.doe@example.com</p>
+
+                    <p
+                            data-th-text="${loggedInUser.phoneNumber}"
+                            class="text-sm text-gray-500 dark:text-gray-400">Phone: +1 (234) 567-890</p>
+
+                    <p
+
+                            data-th-text="'email verified : ' +${loggedInUser.emailVerified}"
+                            class="text-sm text-gray-500 dark:text-gray-400">Email Verified: Yes</p>
+
+                    <p
+                            data-th-text="'phone verified : ' +${loggedInUser.phoneVerified}"
+                            class="text-sm text-gray-500 dark:text-gray-400">Phone Verified: No</p>
+
+
+                    <p
+                            data-th-text="'Role : ' +${loggedInUser.roleList}"
+                            class="text-sm text-gray-500 dark:text-gray-400">Role</p>
+
+
+                    <div class="mt-8 w-full">
+                        <h3 class="text-lg font-semibold text-gray-800 dark:text-white mb-2">Provider Information</h3>
+                        <ul class="text-sm text-gray-600 dark:text-gray-400">
+                            <li><span
+                                    data-th-text="'provider : ' +${loggedInUser.provider}"
+                                    class="font-medium text-gray-900 dark:text-white">Provider:</span></li>
+
+                            <li>
+                                <span
+                                    data-th-text="'provider id : ' +${loggedInUser.providerUserId}"
+                                    class="font-medium text-gray-900 dark:text-white">Provider User ID:</span></li>
+                        </ul>
+                    </div>
+
+                    <div class="flex mt-6 space-x-4">
+                        <a
+
+                                href="/do-logout" class="px-4 py-2 text-sm font-medium text-gray-800 bg-gray-100 rounded-lg shadow hover:bg-gray-200 focus:ring-4 focus:ring-gray-300">
+                            Logout
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+
+
+
+
+
+</div>
+
+<script>
+    console.log("Profile page loaded successfully");
+</script>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" data-th-replace="~{base :: parent(~{::#content},~{::title},~{})}">
+<head>
+    <title>Home Page</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+</head>
+<body class="bg-gray-100 text-gray-800">
+<div id="content" class="container mx-auto mt-10 p-6 bg-white shadow-md rounded-lg">
+    <header class="text-center mb-10">
+        <h1 class="text-4xl font-bold text-gray-900">Harsh Khatana</h1>
+        <p class="text-lg text-gray-600 mt-2">Java Developer</p>
+        <p class="text-gray-500 mt-2 italic">
+            Passionate about building efficient, scalable, and robust software solutions
+            .
+        </p>
+    </header>
+
+    <section>
+        <h2 class="text-2xl font-semibold text-gray-800 mb-6">Explore More</h2>
+        <ul class="list-disc list-inside space-y-4">
+            <li class="text-lg">
+                <span class="font-semibold text-gray-900">YouTube Channel:</span>
+                <a th:href="'#' + ${youtubeChannel}" class="text-blue-600 hover:underline" target="_blank" th:text="${youtubeChannel}">YouTube</a>
+            </li>
+            <li class="text-lg">
+                <span class="font-semibold text-gray-900">GitHub:</span>
+                <a th:href="${gihub}" class="text-blue-600 hover:underline" target="_blank" th:text="${gihub}">GitHub</a>
+            </li>
+            <li class="text-lg">
+                <span class="font-semibold text-gray-900">Leetcode:</span>
+                <a th:href="${leetcode}" class="text-blue-600 hover:underline" target="_blank" th:text="${leetcode}">GitHub</a>
+            </li>
+        </ul>
+    </section>
+</div>
+</body>
+</html>

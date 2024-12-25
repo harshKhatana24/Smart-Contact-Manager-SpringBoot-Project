@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" data-th-replace="~{base :: parent(~{::#content},~{::title},~{::script})}">
+<head>
+  <title data-th-text="${loggedInUser.name + ' | SCM2.0'}">Add Contacts Page</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="User Profile Page for SCM2.0">
+</head>
+<body>
+
+<div id="content">
+
+  <!-- Sidebar if user is logged in -->
+  <div th:if="${loggedInUser}">
+    <div data-th-replace="~{user/sidebar :: sidebar}"></div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="sm:pl-64 pt-20" style="height: 1000px;">
+    <div class="grid grid-cols-12">
+
+      <!--            Add Contact Form -->
+      <div class="col-span-3"></div>
+      <div class="col-span-12 md:col-span-6">
+
+        <div class="card block p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700">
+
+
+          <!--                    message dekhana hai-->
+          <div data-th-replace="~{message :: messagebox}"></div>
+
+
+
+          <h1 class="text-2xl font-semibold">Update Contact</h1>
+
+          <form
+                  class="mt-8"
+                  data-th-action="@{'/user/contacts/update/'+${contactId}}"
+                  data-th-object="${contactForm}"
+                  method="post"
+                  enctype="multipart/form-data"
+          >
+
+            <!--                        name form-->
+            <div class="mb-3">
+              <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Contact Name</label>
+              <div class="flex">
+                          <span class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border rounded-e-0 border-gray-300 border-e-0 rounded-s-md dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
+                            <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+                                <path d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512l388.6 0c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304l-91.4 0z"/>\
+                            </svg>
+                          </span>
+                <input
+
+                        data-th-field="*{name}"
+                        type="text"
+                        id="name"
+                        class="rounded-none rounded-e-lg bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        placeholder="contact name">
+
+              </div>
+
+              <p class="text-red-500"
+                 data-th-if="${#fields.hasErrors('name')}"
+                 data-th-errors="*{name}"
+              >
+              </p>
+
+            </div>
+
+            <!--                        email field-->
+
+            <div class="mb-3">
+              <label for="contact-email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Contact Email</label>
+              <div class="flex">
+                          <span class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border rounded-e-0 border-gray-300 border-e-0 rounded-s-md dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
+                            <svg class="h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+                                <path d="M48 64C21.5 64 0 85.5 0 112c0 15.1 7.1 29.3 19.2 38.4L236.8 313.6c11.4 8.5 27 8.5 38.4 0L492.8 150.4c12.1-9.1 19.2-23.3 19.2-38.4c0-26.5-21.5-48-48-48L48 64zM0 176L0 384c0 35.3 28.7 64 64 64l384 0c35.3 0 64-28.7 64-64l0-208L294.4 339.2c-22.8 17.1-54 17.1-76.8 0L0 176z"/>
+                            </svg>
+                          </span>
+                <input
+                        data-th-field="*{email}"
+                        type="text"
+                        id="contact-email"
+                        class="rounded-none rounded-e-lg bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        placeholder="contact email">
+              </div>
+
+              <p class="text-red-500"
+                 data-th-if="${#fields.hasErrors('email')}"
+                 data-th-errors="*{email}"
+              >
+              </p>
+
+            </div>
+
+
+
+            <!--                        phone number-->
+
+            <div class="mb-3">
+              <label for="phone-number" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Contact Number</label>
+              <div class="flex">
+                          <span class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border rounded-e-0 border-gray-300 border-e-0 rounded-s-md dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
+                            <svg class="h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+                                <path d="M164.9 24.6c-7.7-18.6-28-28.5-47.4-23.2l-88 24C12.1 30.2 0 46 0 64C0 311.4 200.6 512 448 512c18 0 33.8-12.1 38.6-29.5l24-88c5.3-19.4-4.6-39.7-23.2-47.4l-96-40c-16.3-6.8-35.2-2.1-46.3 11.6L304.7 368C234.3 334.7 177.3 277.7 144 207.3L193.3 167c13.7-11.2 18.4-30 11.6-46.3l-40-96z"/>
+                            </svg>
+                          </span>
+                <input
+                        data-th-field="*{phoneNumber}"
+                        type="text"
+                        id="phone-number"
+                        class="rounded-none rounded-e-lg bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        placeholder="contact number">
+              </div>
+
+              <p class="text-red-500"
+                 data-th-if="${#fields.hasErrors('phoneNumber')}"
+                 data-th-errors="*{phoneNumber}"
+              >
+              </p>
+
+            </div>
+
+
+            <!--                    address-->
+
+            <div class="mb-3">
+
+              <label for="message" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Contact Address</label>
+              <textarea
+
+                      data-th-field="*{address}"
+                      id="message"
+                      rows="4"
+                      class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                      placeholder="contact address here ...">
+
+                        </textarea>
+
+
+            </div>
+
+
+            <!--                    description-->
+            <div class="mb-3">
+
+              <label for="description" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Contact Description</label>
+              <textarea
+
+                      data-th-field="*{description}"
+                      id="description"
+                      rows="4"
+                      class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                      placeholder="contact description ...">
+
+                        </textarea>
+
+
+            </div>
+
+
+            <!--                        social links-->
+
+            <div class="flex gap-2 mb-3">
+
+              <!--                        website link-->
+              <div class="w-full">
+                <div class="mb-3">
+                  <label for="website-link" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Website Link</label>
+                  <div class="flex">
+                          <span class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border rounded-e-0 border-gray-300 border-e-0 rounded-s-md dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
+                            <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+                                <path d="M57.7 193l9.4 16.4c8.3 14.5 21.9 25.2 38 29.8L163 255.7c17.2 4.9 29 20.6 29 38.5l0 39.9c0 11 6.2 21 16 25.9s16 14.9 16 25.9l0 39c0 15.6 14.9 26.9 29.9 22.6c16.1-4.6 28.6-17.5 32.7-33.8l2.8-11.2c4.2-16.9 15.2-31.4 30.3-40l8.1-4.6c15-8.5 24.2-24.5 24.2-41.7l0-8.3c0-12.7-5.1-24.9-14.1-33.9l-3.9-3.9c-9-9-21.2-14.1-33.9-14.1L257 256c-11.1 0-22.1-2.9-31.8-8.4l-34.5-19.7c-4.3-2.5-7.6-6.5-9.2-11.2c-3.2-9.6 1.1-20 10.2-24.5l5.9-3c6.6-3.3 14.3-3.9 21.3-1.5l23.2 7.7c8.2 2.7 17.2-.4 21.9-7.5c4.7-7 4.2-16.3-1.2-22.8l-13.6-16.3c-10-12-9.9-29.5 .3-41.3l15.7-18.3c8.8-10.3 10.2-25 3.5-36.7l-2.4-4.2c-3.5-.2-6.9-.3-10.4-.3C163.1 48 84.4 108.9 57.7 193zM464 256c0-36.8-9.6-71.4-26.4-101.5L412 164.8c-15.7 6.3-23.8 23.8-18.5 39.8l16.9 50.7c3.5 10.4 12 18.3 22.6 20.9l29.1 7.3c1.2-9 1.8-18.2 1.8-27.5zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256z"/>
+                            </svg>
+                          </span>
+                    <input
+
+                            data-th-field="*{websiteLink}"
+                            type="text"
+                            id="website-link"
+                            class="rounded-none rounded-e-lg bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            placeholder="https://algorithavengers.com/">
+                  </div>
+                </div>
+              </div>
+
+
+              <!--                        linked in link-->
+              <div class="w-full">
+                <div class="mb-3">
+                  <label for="linkedin-link" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Linkedin</label>
+                  <div class="flex">
+                          <span class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border rounded-e-0 border-gray-300 border-e-0 rounded-s-md dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
+                            <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+                                <path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"/>
+                            </svg>
+                          </span>
+                    <input
+
+                            data-th-field="*{linkedInLink}"
+                            type="text"
+                            id="linkedin-link"
+                            class="rounded-none rounded-e-lg bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            placeholder="https://www.linkedin.com/in/harsh-khatana/">
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+
+
+            <!--                        contact image field-->
+
+            <div class="mb-4">
+              <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                     for="image_file_input">Contact Image
+              </label>
+              <input
+                      data-th-field="*{contactImg}"
+
+                      class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+                      aria-describedby="user_avatar_help"
+                      id="image_file_input"
+                      type="file">
+
+              <div class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="user_avatar_help">A profile picture is useful to confirm your contact</div>
+
+              <img
+                      data-th-src="*{picture}"
+                      class="max-h-52 mx-auto rounded-lg m-3"
+                      src=""
+                      id="upload-image-preview"
+                      alt="">
+
+            </div>
+
+
+
+
+
+
+
+
+            <!--                        favourite checkbox-->
+            <div class="flex items-center mb-8">
+              <input data-th-field="*{favourite}" id="default-checkbox" type="checkbox" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+              <label for="default-checkbox" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Is this contact your favourite one ?</label>
+            </div>
+
+
+
+            <div class="button_container text-center gap-5">
+
+              <button
+                      type="submit"
+                      class="px-3 py-2 bg-gray-900 dark:bg-blue-600 dark:hover:bg-blue-400 rounded text-white"
+              >
+                Update Contact
+              </button>
+
+            </div>
+
+
+
+          </form>
+
+
+
+
+
+
+
+        </div>
+
+
+
+      </div>
+
+
+    </div>
+
+
+
+
+  </div>
+</div>
+
+</div>
+
+<script data-th-src="@{/js/admin.js}"></script>
+
+<script>
+  console.log("Add contacts page loaded successfully");
+</script>
+</body>
+</html>
